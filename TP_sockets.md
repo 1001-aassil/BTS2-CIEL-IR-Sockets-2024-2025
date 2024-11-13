@@ -19,11 +19,14 @@ Complétez la méthode `NetworkDiscovery::Init()` pour :
 bool NetworkDiscovery::Init()
 {
     // À compléter :
-    // 1. Essayer de lier le socket au port NetworkPort
-    // 2. Si échec, essayer les ports suivants jusqu'à succès
-    // 3. Ajouter le socket au sélecteur
-    return true;
-}
+   do {
+		status = _socket.bind(port);
+		port = port + 1
+	} while (status != sf::Socket::Done || port <= 60001);
+
+	// 3. Ajouter le socket au sélecteur
+	_socketSelector.add(_socket);
+	return true;
 ```
 
 ### Exercice 1.2 : Broadcast des serveurs
